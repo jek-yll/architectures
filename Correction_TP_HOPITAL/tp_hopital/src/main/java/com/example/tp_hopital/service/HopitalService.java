@@ -75,5 +75,48 @@ public class HopitalService {
 
         return result;
     }
-    
+
+    public boolean createFicheSoin(Consultation consultation) throws RepositoryException {
+        boolean result = false;
+        Session session = sessionFactory.openSession();
+        ficheSoinRepository.setSession(session);
+        FicheSoin ficheSoin = FicheSoin.builder()
+                .consultation(consultation)
+                .build();
+        session.beginTransaction();
+        try {
+            ficheSoinRepository.create(ficheSoin);
+            session.getTransaction().commit();
+            result = true;
+        }catch (Exception ex) {
+            session.getTransaction().rollback();
+            throw new RepositoryException();
+        }finally {
+            session.close();
+        }
+        return result;
+    }
+
+    public boolean createPrescription(String medic, FicheSoin ficheSoin) throws RepositoryException {
+        boolean result = false;
+        Session session = sessionFactory.openSession();
+        prescriptionRepository.setSession(session);
+        Prescription prescription = Prescription.builder()
+                .medic(medic)
+                .ficheSoin(ficheSoin)
+                .build();
+        session.beginTransaction();
+        try {
+            prescriptionRepository.create(prescription);
+            session.getTransaction().commit();
+            result = true;
+        }catch (Exception ex) {
+            session.getTransaction().rollback();
+            throw new RepositoryException();
+        }finally {
+            session.close();
+        }
+        return result;
+    }
+
 }
