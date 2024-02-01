@@ -14,26 +14,26 @@ public class PatientService {
         this.sessionFactory = sessionFactory;
     }
 
-    public boolean createPatient(String name, String phone) throws RepositoryException {
-        boolean result = false;
-        Session session = sessionFactory.openSession();
-        patientRepository.setSession(session);
-        Patient patient = Patient.builder()
-                .name(name)
-                .phone(phone)
-                .build();
-        session.beginTransaction();
-        try {
-            patientRepository.create(patient);
-            session.getTransaction().commit();
-            result = true;
-        }catch (Exception ex) {
-            session.getTransaction().rollback();
-            throw new RepositoryException();
-        }finally {
-            session.close();
-        }
-
-        return result;
-    }
+//    public boolean createPatient(String name, String phone) throws RepositoryException {
+//        boolean result = false;
+//        Session session = sessionFactory.openSession();
+//        patientRepository.setSession(session);
+//        Patient patient = Patient.builder()
+//                .name(name)
+//                .phone(phone)
+//                .build();
+//        session.beginTransaction();
+//        try {
+//            patientRepository.create(patient);
+//            session.getTransaction().commit();
+//            result = true;
+//        }catch (Exception ex) {
+//            session.getTransaction().rollback();
+//            throw new RepositoryException();
+//        }finally {
+//            session.close();
+//        }
+//
+//        return result;
+//    }
 }
