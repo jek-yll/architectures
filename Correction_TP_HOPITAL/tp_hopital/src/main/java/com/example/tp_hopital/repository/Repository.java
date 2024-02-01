@@ -7,6 +7,9 @@ import java.util.List;
 public abstract class Repository<T> {
     protected Session session;
 
+    public Session getSession() {
+        return session;
+    }
     public Repository(Session session) {
         this.session = session;
     }
