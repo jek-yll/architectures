@@ -10,7 +10,12 @@ public abstract class Repository<T> {
     public Session getSession() {
         return session;
     }
-    public Repository(Session session) {
+
+    public Repository() {
+
+    }
+
+    public void setSession(Session session) {
         this.session = session;
     }
 

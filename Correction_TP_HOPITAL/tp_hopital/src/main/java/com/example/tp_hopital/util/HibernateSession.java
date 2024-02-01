@@ -10,10 +10,9 @@ public class HibernateSession {
     private static StandardServiceRegistry standardServiceRegistry;
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory(){
+    public static SessionFactory getSessionFactory() {
         standardServiceRegistry = new StandardServiceRegistryBuilder().configure().build();
         sessionFactory = new MetadataSources(standardServiceRegistry).buildMetadata().buildSessionFactory();
         return sessionFactory;
     }
-
 }
